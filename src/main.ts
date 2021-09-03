@@ -10,8 +10,8 @@ export function calculateDistanceSpeeding(data: Waypoint[]): number {
 
   data.reduce((pre, curr) => {
     const timeBetweenWaypoints = (new Date(curr.timestamp).getTime() - new Date(pre.timestamp).getTime()) / 1000;
-    if (isSpeeding(curr.speed , curr.speed_limit)) {
-      distanceSpeeding += curr.speed * timeBetweenWaypoints;
+    if (isSpeeding(pre.speed , curr.speed_limit)) {
+      distanceSpeeding += pre.speed * timeBetweenWaypoints;
     }
     return curr;
   });
@@ -22,7 +22,7 @@ export function calculateDistanceSpeeding(data: Waypoint[]): number {
 export function calculateDurationSpeeding(data: Waypoint[]): number {
   let durationSpeeding = 0;
   data.reduce((pre, curr) => {
-    if (isSpeeding(curr.speed, curr.speed_limit)) {
+    if (isSpeeding(pre.speed, pre.speed_limit)) {
       durationSpeeding += (new Date(curr.timestamp).getTime() - new Date(pre.timestamp).getTime()) / 1000;
     }
 
@@ -34,9 +34,10 @@ export function calculateDurationSpeeding(data: Waypoint[]): number {
 
 export function calculateTotalDistance(data: Waypoint[]): number {
   let totalDistance = 0;
+
   data.reduce((pre, curr) => {
     const timeBetweenWaypoints = (new Date(curr.timestamp).getTime() - new Date(pre.timestamp).getTime()) / 1000;
-    totalDistance += timeBetweenWaypoints * curr.speed;
+    totalDistance +=  pre.speed * timeBetweenWaypoints ;
     return curr;
   });
 
@@ -53,3 +54,5 @@ export function calculateTotalDrivingTime(data: Waypoint[]): number {
 
   return totalDrivingTime;
 }
+
+
