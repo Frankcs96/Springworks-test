@@ -19,7 +19,7 @@ describe('Springworks Assaingment', () => {
   });
 
   test('Total Distance', () => {
-    expect(calculateTotalDistance(data)).toBe(20);
+    expect(calculateTotalDistance(data)).toBe(185.75);
   });
 
   test('Total drive time', () => {

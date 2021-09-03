@@ -36,7 +36,7 @@ export function calculateTotalDistance(data: Waypoint[]): number {
   let totalDistance = 0;
   data.reduce((pre, curr) => {
     const timeBetweenWaypoints = (new Date(curr.timestamp).getTime() - new Date(pre.timestamp).getTime()) / 1000;
-    totalDistance += timeBetweenWaypoints;
+    totalDistance += timeBetweenWaypoints * curr.speed;
     return curr;
   });
 
