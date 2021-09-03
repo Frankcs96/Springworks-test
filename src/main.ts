@@ -10,7 +10,7 @@ export function calculateDistanceSpeeding(data: Waypoint[]): number {
 
   data.reduce((pre, curr) => {
     const timeBetweenWaypoints = (new Date(curr.timestamp).getTime() - new Date(pre.timestamp).getTime()) / 1000;
-    if (isSpeeding(pre.speed , curr.speed_limit)) {
+    if (isSpeeding(pre.speed , pre.speed_limit)) {
       distanceSpeeding += pre.speed * timeBetweenWaypoints;
     }
     return curr;
